@@ -48,13 +48,15 @@ Code is in insane-bolts.py
 - `pexpect` module from python to read and write to standard input and ouput.
 - `nc` command to connect to instance
   ￼
-  <br /><br />
+  <br />
 
 ## Success
 
 After collecting 500 diamonds, the final flag was outputted.
 ￼
 ![Shouldn't be brute forced](./images/5.png)￼
+
+<br />
 
 ## Thoughts
 
