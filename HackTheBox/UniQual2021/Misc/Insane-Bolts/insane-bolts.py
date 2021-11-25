@@ -1,7 +1,6 @@
 import pexpect
 
 def isValid(rows, cols, newRow, newCol, matrix1):
-    # print(rows, cols, newRow, newCol)
     if(0<= newRow < rows and 0 <= newCol < cols):
         if(matrix1[newRow][newCol] != '☠️'):
             return True
