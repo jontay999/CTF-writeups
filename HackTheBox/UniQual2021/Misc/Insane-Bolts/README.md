@@ -13,7 +13,7 @@ When we connect to the Docker Instance, we are given two options.
 
 It is a command line game where you have to input the shortest path for the 🤖 to reach 💎 via instructions DLR (Down, Left, Right). For some reason Up was not needed in this game.
 
-![Basic Idea](./images/3.png)
+![Basic Idea](./images/2.png)
 
 From the grid given, it can be seen that the valid path always passes through a 🔩 at every step
 
@@ -25,7 +25,7 @@ At first, I thought I could slowly play the game but after a while I realised th
 
 There is a time limit, approximately 10-15 seconds, that if exceeded, would end the game. One mistake and the game would end as well. There are also a minimum of 500 levels to be completed which requires scripting
 
-![Shouldn't be brute forced](./images/4.png)￼
+![Shouldn't be brute forced](./images/3.png)￼
 
 <br /><br />
 
@@ -54,7 +54,7 @@ Code is in insane-bolts.py
 
 After collecting 500 diamonds, the final flag was outputted.
 ￼
-![Shouldn't be brute forced](./images/5.png)￼
+![Shouldn't be brute forced](./images/4.png)￼
 
 <br />
 
