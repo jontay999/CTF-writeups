@@ -1,5 +1,10 @@
 # Insane Bolt Writeup
 
+### Info
+
+Category: Miscellaneous <br/>
+Difficulty: ⭐⭐☆☆
+
 ### **TLDR**
 
 Connect to instance, take in input as a grid, run BFS to get shortest paths, and send to standard input.
