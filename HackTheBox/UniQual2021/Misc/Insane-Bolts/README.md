@@ -45,7 +45,7 @@ The main steps were to
 - Make the BFS function that would output the shortest path
 - Send the Shortest Path as input
 
-Code is in insane-bolts.py
+Code is in [insane-bolts.py](./insane-bolts.py)￼
 <br /><br />
 
 ## Tools Used
