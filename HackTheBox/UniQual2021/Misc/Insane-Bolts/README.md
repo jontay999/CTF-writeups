@@ -3,12 +3,13 @@
 ### Info
 
 Category: Miscellaneous <br/>
-Difficulty: ⭐⭐☆☆
+Difficulty: ★★☆☆
 
 ### **TLDR**
 
 Connect to instance, take in input as a grid, run BFS to get shortest paths, and send to standard input.
-<br /><br />
+
+<br />
 
 ## Initial
 
@@ -22,7 +23,7 @@ It is a command line game where you have to input the shortest path for the 🤖
 
 From the grid given, it can be seen that the valid path always passes through a 🔩 at every step
 
-<br /><br />
+<br />
 
 ## First Try
 
@@ -32,7 +33,7 @@ There is a time limit, approximately 10-15 seconds, that if exceeded, would end 
 
 ![Shouldn't be brute forced](./images/3.png)￼
 
-<br /><br />
+<br />
 
 ## Main Idea
 
@@ -46,7 +47,8 @@ The main steps were to
 - Send the Shortest Path as input
 
 Code is in [insane-bolts.py](./insane-bolts.py)￼
-<br /><br />
+
+<br />
 
 ## Tools Used
 
