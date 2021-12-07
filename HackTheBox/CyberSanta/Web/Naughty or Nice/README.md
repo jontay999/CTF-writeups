@@ -34,7 +34,7 @@ async verify(token) {
     - ```
       cat test.pem | xxd -p | tr -d "\\n"
       ```
-  - Run the command `echo -n "new_jwt_token" | openssl dgst -sha256 -mac HMAC -macopt hexkey: \_the_hex_of_publickey
+  - Run the command `echo -n "new_jwt_token" | openssl dgst -sha256 -mac HMAC -macopt hexkey: the_hex_of_publickey`
   - Convert the signature into base64 and remove appended equals signs
 
   ```
