@@ -1,6 +1,6 @@
 # Cyber Santa 2021 – Warehouse Maintenance
 
-- **Category:** Crypto
+- **Category:** Crypto Day 5
 - **Points:** 325
 - **Difficulty:** ★★☆☆
 
@@ -78,5 +78,5 @@ b" (1, 'wood', 124)(2, 'sugar', 352)(3, 'love', 999)(4, 'glass', 719)(5, 'paint'
 
 ## Thoughts
 
-- Honestly I did not manage to solve it within the time frame. I got 95% of the code but for some reason it didn't work. The problem with my code was that originally I set the sample script to be in hex rather than in bytes which was causing the hashpumpy to give me its signature in a mixture of bytes and hex. After the competition, I amended the known_data to be in bytesand it worked
+- Honestly I did not manage to solve it within the time frame. I got 95% of the code but for some reason it didn't work. The problem with my code was that originally I set the sample script to be in hex rather than in bytes which was causing the hashpumpy to give me its signature in a mixture of bytes and hex. After the competition, I amended the known_data to be in bytes and it worked!
 - Was a good crypto challenge, and introduced me to the idea that the SHA encryption algorithms can still have vulnerabilities.
