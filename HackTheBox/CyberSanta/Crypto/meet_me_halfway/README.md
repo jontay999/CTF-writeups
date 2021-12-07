@@ -111,4 +111,4 @@ The youtube link was of a rather pleasant 8 bit christmas jam.
 ## Thoughts
 
 - Learnt quite a bit about AES decryption and the different modes.
-- My first thought was of sending all 0s and XOR'ing it with the given ciphertext but that only work for CBC mode and not ECB mode
+- My first thought was of sending all 0s and XOR'ing it with the given ciphertext but that would only work for CBC mode and not ECB mode
