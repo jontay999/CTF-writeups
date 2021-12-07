@@ -64,3 +64,4 @@ HTB{S4nt4_g0t_ninety9_pr0bl3ms_but_chr1stm4s_4in7_0n3}
 - Hex encoding of base 64 public key should have been done using the bash utilities. I did not figure out why converting it into bytes then hex gave me an invalid signature.
 - Learnt a new templating payload
 - Learnt how to crack jwts! (weak ones that accept multiple algorithms)
+- Useful post that I referred to [jwt cracker](https://habr.com/en/post/450054/)
