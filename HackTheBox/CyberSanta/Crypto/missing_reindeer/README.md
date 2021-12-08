@@ -48,7 +48,7 @@ In RSA the cipher is encrypted via the function:
 
 - `ciphertext = plaintext^exponent % modulus`.
 
-But with such a large modulus and small exponent, it was very likely that the modulus was never used. By running a function to cube root the ciphertext, (Note: the `find_invpower` function was found on StackOverflow, but I can't seem to find it at the moment. If I find it, I will update this writeup.)
+But with such a large modulus and small exponent, it was very likely that the modulus was never used. By running a function to cube root the ciphertext, (Note: the `find_invpower` function was found [here](https://stackoverflow.com/questions/356090/how-to-compute-the-nth-root-of-a-very-big-integer) on StackOverflow)
 
 ```
 def find_invpow(x,n):
