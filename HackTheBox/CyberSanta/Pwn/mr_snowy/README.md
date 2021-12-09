@@ -1,6 +1,6 @@
 # Cyber Santa 2021 – Mr Snowy
 
-- **Category:** Pwn
+- **Category:** Pwn Day 1
 - **Points:** 300
 - **Difficulty:** ★☆☆☆
 
