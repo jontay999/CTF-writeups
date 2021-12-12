@@ -1,4 +1,4 @@
-# niteCTF – Prisoners
+# niteCTF – Variables
 
 - **Category:** Crypto
 - **Points:** 500
