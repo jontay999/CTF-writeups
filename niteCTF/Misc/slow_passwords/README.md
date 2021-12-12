@@ -1,4 +1,4 @@
-# niteCTF – Prisoners
+# niteCTF – Slow Passwords
 
 - **Category:** Misc
 - **Points:** 500
