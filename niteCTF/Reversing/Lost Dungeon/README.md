@@ -11,7 +11,7 @@ This was actually 2 independent challenges bundled within the same file. We are 
 
 Challenge 1
 
-1. Playing the game for a bit on my windows VM showed that there was a very long path to a section of the map. However, I didn't think about patching/modding the game before playing it and spent a good 20 mins traersing to the location.
+1. Playing the game for a bit on my windows VM showed that there was a very long path to a section of the map. However, I didn't think about patching/modding the game before playing it and spent a good 20 mins travelling to the location.
 2. When I reached the location I was immediately surrounded by enemies, and couldn't move which wasted my time hahha
 3. I used [dnsPy](https://github.com/dnSpy/dnSpy/releases) to reverse the `.dll` files. The main game files were all in `Assembly-CSharp.dll`
 4. One of the classes was a `Mover` class that had some parts multiplied by `Time` which was what I figured controlled the movement speed.
@@ -33,7 +33,7 @@ Challenge 2
 2. Some of the NPCs mentioned that the "portal" would only open for wizards.
 3. Taking a look at the `Portal` class showed that there was a check for the player's name as "wizard". Following that, a random scene would be loaded from (2, length of total scenes). Changing the scene loaded to `this.scenes[0]` led to us entering the secret level
 4. However the NPCs there mentioned that we had to change our respawn point.
-5. Taking a look at the `GameObject` Class I realised that the character spawned at "RespawnPoint" and that there was another function that when called would spawn the character at "SpawnPoint"
+5. Taking a look at the `GameManager` Class I realised that the character spawned at "SpawnPoint" and that there was another function that when called would spawn the character at "RespawnPoint"
 6. Changing the spawn point led to the flag
 
 Flag 2
