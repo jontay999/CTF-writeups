@@ -11,7 +11,7 @@ We are given an instance to connect to. We have to guess the correct password in
 
 1. After getting some very quick responses and some very long responses, it probably meant that the password characters somehow corresponded to the length of time it took to respond.
 2. Upon more experimentation, every time I send in an `a` and the response was fast, the correct character was quite lexicographically close to `a` and vice versa.
-3. The seconds it takes the server to respond directly corresponds to the offset from the letter I sent in.
+3. The seconds it takes the server to respond directly correspond to the offset from the letter I sent in.
 4. I crafted a script that would always send `a` as the first guess and time the amount of seconds it took to respond in order to decide the second guess.
 
 ```
