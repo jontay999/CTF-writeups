@@ -11,3 +11,4 @@ CTFs joined so far
 2. HackTheBox UniQual (19th Nov - 21st Nov)
 3. DamnCon2021 (24th November)
 4. HackTheBox (1st Dec - 5th Dec)
+5. NiteCTF (10th Dec - 12th Dec)
