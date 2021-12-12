@@ -24,7 +24,7 @@ Challenge 1
 Flag 1
 
 ```
-nite{reply.nite@gmail.com}
+nite{Eb1c_9aM3R...}
 ```
 
 Challenge 2
@@ -39,7 +39,7 @@ Challenge 2
 Flag 2
 
 ```
-nite{}
+nite{L3vel_100_Maf1a_b055}
 ```
 
 ## Thoughts
