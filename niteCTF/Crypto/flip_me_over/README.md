@@ -11,6 +11,9 @@ We are given a server instance to connect to and the encrypting script `flipmeov
 
 1. We have to send two things when connected to the server. A token and a tag, the token is the encrypted string that we want ('gimmeflag') and tag functions like an Initialization Vector (IV)
 2. The tag is XORed with every 16 bytes of our token so we have to make sure that we XOR it beforehand to make sure that that operation is negated.
+
+   - Edit: This step was not necessary because the IV supplied would not be used for decryption.
+
 3. This implementation is vulnerable to a bit flipping attack that is far better explained [here](https://zhangzeyu2001.medium.com/attacking-cbc-mode-bit-flipping-7e0a1c185511)
 4. Essentially sending `fimmeflag` as plaintext to encrypt. Reuse the encrypted block as the IV for the next block. Flip one bit to change the `f` to a `g` and bingo.
 
