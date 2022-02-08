@@ -8,7 +8,8 @@ CTFs joined so far
 **2022**
 
 1. KnightCTF (21st Jan)
-2. CyberGrabs 0x03 (6th Feb)
+2. diceCTF (5th - 6th Feb)
+3. CyberGrabs 0x03 (6th Feb)
 
 **2021**
 
