@@ -227,19 +227,19 @@ Part of the prime generation function shows how r can be derived once x is known
 
 ```
 def keygen():
-	while True:
-		p,q = [getStrongPrime(1024) for _ in range(2)]
-		if p%4==3 and q%4==3:
-			break
+    while True:
+        p,q = [getStrongPrime(1024) for _ in range(2)]
+        if p%4==3 and q%4==3:
+            break
 
-	r = 2
-	while True:
-		r = r*x
-		if r.bit_length()>1024 and isPrime(r-1):
-			r = r-1
-			break
+    r = 2
+    while True:
+        r = r*x
+        if r.bit_length()>1024 and isPrime(r-1):
+            r = r-1
+            break
 
-	return p,q,r
+    return p,q,r
 ```
 
 Using the similar function we can derive r. Had to switch it over to sage because the isPrime function from python would error out as it cannot check primality of such a big number.
@@ -306,10 +306,8 @@ Because of some magic that I don't fully understand `ip, iq, p, q, k, t` are all
 (9) ip + t = qz
 (10) iq + k = pz
 
-(11) z = (ip + t + iq + k)/ (p + q) ≈ 2 or small integer
+(11) z = (ip + t + iq + k)/ (p + q) ≈ 2 or small integer (brute forced later)
 ```
-
-### To do fill in this part to brute-force z
 
 Now bringing it all together to get some actually solvable equations
 
@@ -324,26 +322,32 @@ ip x p + iq x q = 2 + (qz - ip) x p + (pz - iq) x q
 
 ```
 
-Equation (13) is basically a quadratic equation that can be solved using sage
+Equation (13) is basically a quadratic equation that can be solved while brute forcing for the value of z
 
 ```
 from sympy import Symbol,Eq,solve
 
-p=Symbol('p')
-q=Symbol('q')
-equation1 = Eq(ip*p+iq*q-pq-1,0)
-equation2 = Eq(p*q-pq,0)
-solution = solve((equation1,equation2),(p,q))
+for z in range(1,100):
+    try:
+        p=Symbol('p')
+        q=Symbol('q')
+        equation1 = Eq(ip*p+iq*q-pq*z-1,0)
+        equation2 = Eq(p*q-pq,0)
+        solution = solve((equation1,equation2),(p,q))
 
-p,q = None, None
-for poss_p,poss_q in solution:
-    if(poss_p % 4 == 3 and poss_q % 4 == 3):
-        p = poss_p
-        q = poss_q
-        break
-assert n % q == 0
-assert n % p == 0
+        p,q = None, None
+        for poss_p,poss_q in solution:
+            if(poss_p % 4 == 3 and poss_q % 4 == 3):
+                p = poss_p
+                q = poss_q
+                break
+        assert n % q == 0
+        assert n % p == 0
+        print(f"z: {z}, p: {p}, q: {q}")
+    except:
+        pass
 
+#turns out z was 1
 ```
 
 ### Step 4: Find the first half of the flag
