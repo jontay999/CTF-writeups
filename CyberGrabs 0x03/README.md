@@ -10,4 +10,6 @@ This CTF lasted 12 hours
 
 Managed to solve 24/29 challenges across categories of Crypto, Forensics, Web, Reverse, OSINT and Misc
 
+Placed 28th place out of 285 teams.
+
 ![score](./images/score.png)
