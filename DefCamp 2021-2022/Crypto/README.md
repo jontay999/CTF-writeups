@@ -35,11 +35,59 @@ while i < len(str(iflag)):
    i += 2
 
 print r
-
 ```
 
 ### Solution
 
+```
+def FAN(n, m):
+    i = 0
+    z = []
+    s = 0
+    while n > 0:
+        # print(n)
+        if n % 2 != 0:
+            z.append(2 - (n % 4))
+        else:
+            z.append(0)
+        n = (n - z[i])//2
+        i = i + 1
+    z = z[::-1]
+    l = len(z)
+    for i in range(0, l):
+        s += z[i] * m ** (l - 1 - i)
+    return s
+
+xxx={}
+for kk in range(0,100):
+    xxx[FAN(kk, 3)]=kk
+ff=open('flag_enc.txt','r')
+dd=ff.read()
+print dd
+str1=''
+jj=0
+while jj<len(dd):
+    if xxx.has_key(int(dd[jj:jj+4])):
+        str1+='%d'%(xxx[int(dd[jj:jj+4])])
+        jj+=4
+    elif xxx.has_key(int(dd[jj:jj+3])):
+        str1+='%02d'%(xxx[int(dd[jj:jj+3])])
+        jj+=3
+    elif xxx.has_key(int(dd[jj:jj+2])):
+        str1+='%02d'%(xxx[int(dd[jj:jj+2])])
+        jj+=2
+    elif xxx.has_key(int(dd[jj:jj+1])):
+        str1+='%02d'%(xxx[int(dd[jj:jj+1])])
+        jj+=1
+print str1
+str2='%x'%(int(str1))
+print str2.decode('hex')
+```
+
+### Flag
+
+```
+[ola_th1s_1s_p0l]
 ```
 
 ## Raw Image (Medium)
@@ -68,4 +116,7 @@ Running `python3 ecb.py raw-image.bin --pixel-size=4` gives this image
 
 Mirroring it horizontally and vertically gives the final flag
 ![answer](images/answer.png)
+
+```
+
 ```
