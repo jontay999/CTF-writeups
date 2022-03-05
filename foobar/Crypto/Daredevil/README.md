@@ -8,7 +8,7 @@ TLDR
 - Try to make `pow(sign, e, n) == msg` where `msg = bytes_to_long(b'd4r3d3v!l')`
 - We can't send the target payload immediately so just construct a `N` + payload which will decrypt to same thing cos everything is mod N
 
-Solve Script to construct payload:
+Solve Script
 
 ```
 from libnum import n2s,s2n
