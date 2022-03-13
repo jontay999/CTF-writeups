@@ -1,4 +1,4 @@
-# CTF Name CTF 2022 – Category Challenges (that i found interesting lol)
+# CTF Name 2022 – Challenges
 
 ## Challenge 1: Chall Name
 
