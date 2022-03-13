@@ -10,38 +10,12 @@
 
 ### Solver
 
-```python
-from libnum import n2s,s2n
-
-m1 = b"CTFSG{1}"
-m2 = b"CTFSG{2}"
-
-from pwn import *
-
-host = "chals.ctf.sg"
-port = 10101
-p = remote(host, port)
-p.recvuntil(b">")
-p.sendline(m1)
-c1 = int(p.recvline().decode('utf-8').strip())
-print("Got c1:", c1)
-p.recvuntil(b">")
-p.sendline(m2)
-c2 = int(p.recvline().decode('utf-8').strip())
-print("Got c2:", c2)
-
-m1 = s2n(m1)
-m2 = s2n(m2)
-e = 65537
-
-#this part using sage
-n = gcd(m1^e - c1, m2^e - c2)
-print(n2s(n))
-```
+Don't need to automate cos both challenges finish in 5 mins.
 
 ### Learning Points
 
 - Actually no real learning points, but reading up on the minimax algo for playing chopsticks was real interesting
+- got the vibe of playing chess against a guy than open a window and play against chess AI of highest difficulty
 
 ## Challenge 2: Flag Secure Algorithm
 
@@ -79,7 +53,34 @@ if __name__ == '__main__':
 
 ### Solver
 
-No need for solver, basic RSA decryption once you find the gcd
+```python
+from libnum import n2s,s2n
+
+m1 = b"CTFSG{1}"
+m2 = b"CTFSG{2}"
+
+from pwn import *
+
+host = "chals.ctf.sg"
+port = 10101
+p = remote(host, port)
+p.recvuntil(b">")
+p.sendline(m1)
+c1 = int(p.recvline().decode('utf-8').strip())
+print("Got c1:", c1)
+p.recvuntil(b">")
+p.sendline(m2)
+c2 = int(p.recvline().decode('utf-8').strip())
+print("Got c2:", c2)
+
+m1 = s2n(m1)
+m2 = s2n(m2)
+e = 65537
+
+#this part using sage
+n = gcd(m1^e - c1, m2^e - c2)
+print(n2s(n))
+```
 
 ### Learning Points
 
