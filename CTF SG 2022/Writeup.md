@@ -1,4 +1,4 @@
-# CTF SG 2022 – Challenges (those that i like)
+# CTF SG 2022 – Challenges
 
 ## Challenge 1: Chopsticks 1 & 2 (Misc) [First Blooded!]
 
