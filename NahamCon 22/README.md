@@ -4,4 +4,4 @@
 
 Pretty fun CTF with many challenges. I played with ThreeTop Walk and we managed to get 13th place
 
-![score](./images/)
+![score](./score.png)
