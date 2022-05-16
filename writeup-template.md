@@ -25,3 +25,19 @@ FLAG{just_google_it_br0}
 
 - Easy game
 - Too hard
+
+## Format 2
+
+# CTF 2022 – Category Challenges
+
+Note/Disclosure: Some of these challenges were done after the CTF and referencing of other people's solutions.
+
+## Category Challenge: xxx
+
+### Description/Source
+
+### Solver
+
+```python
+
+```
