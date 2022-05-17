@@ -486,13 +486,3 @@ Just a compilation of successful XSS from discord courtesy of
 // the markdown inline code ` is prioritized over the HTML element and breaks it.
 `<p x="`<img src=x onerror=alert(1)>"></p>
 ```
-
-## Web Challenge: Sustenance
-
-### Description/Source
-
-### Solver
-
-```python
-
-```

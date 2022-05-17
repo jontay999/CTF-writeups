@@ -8,7 +8,7 @@ The official writeups are [here](https://hackmd.io/@lamchcl/rJgPUtgI5)
 
 Note: referenced off `lamchcl`'s comments in discord
 
-![subgroup](./subgroup.png)
+![subgroup](./images/subgroup.png)
 
 ### Description/Source
 
