@@ -1,5 +1,3 @@
-# TBD
-
 # TJCTF 2022 – Crypto Challenges
 
 ## Challenge 1: Factor Master
