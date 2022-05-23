@@ -945,7 +945,7 @@ print(secret.hex())
 
 The key is to figure out that this is using TEA Encryption. Given that the blocks are very small (4), and we know the format of the flag `Securinets{` and the fact that the alphabet is hexadecimal, it opens up a meet in the middle attack.
 
-Since we know the some 8 bytes somewhere in the message starts with Securine, so I can build a dictionary of 16^4 \* 256 of possible encryptions of the first round and do meet in the middle for the remaining 2 rounds, which in 6 minutes was done. (Had to go through all possible placements of the flag in the long message)
+Since we know the some 8 bytes somewhere in the message starts with Securine, so I can build a dictionary of 16^4 \* 256 of possible encryptions of the first two rounds and do meet in the middle for the remaining 2 rounds, which in 6 minutes was done. (Had to go through all possible placements of the flag in the long message)
 The decryption routine was just taken from online after a quick google search of `python tea encryption`
 
 ### Solver
@@ -1468,8 +1468,8 @@ print(flag)
 
 ### Flag
 
-```python
-
+```
+Securinets{__Do_N0t_Soph1stcate_Th1ngs_4nD_D0_n0T_r0ll_y0uR_oWn_Crypto__}
 ```
 
 ## Challenge 12: El Beyet^3
@@ -1594,11 +1594,10 @@ phi = (p-1)*(q-1)
 d = int(gmpy2.invert(e, phi))
 
 print(n2s(pow(c,d,N)))
-#flag: Securinets{i don't know what to say! i hate those primes}
 ```
 
 ### Flag
 
-```python
-
+```
+Securinets{i don't know what to say! i hate those primes}
 ```
