@@ -22,6 +22,7 @@ def generateRelatedMessages():
 # idea is to generate msges such that m1 = m2^3
 # then you can find a multiple of the modulus by using c2^3 - c1
 # collect multiples of modulus and use the gcd to get the modulus.
+
 m1,m2 = generateRelatedMessages()
 
 def collectMultiplesOfModulus():
