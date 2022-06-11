@@ -22,7 +22,7 @@ def multiply(elem1, elem2):
     return res
 ```
 
-Note that these operations are commutative so the result of `elem1 * elem2 === elem2 * elem1`
+Note that the group operation is only commutative if the elements are part of two disjoint cycles.
 
 We are then given the public keys of 'Alice' and 'Bob' (2 parties that are trying to communicate with this system) as well as the public key. The private keys are first generated with a large random 2048 bit number `a` and raising the generator to this exponent would be the public key `generator ^ a`. In Diffie Hellman, this would be the trapdoor function that would be easy to compute in the forward manner but hard to derive `a` given `generator ^ a`, essentially the discrete log problem. The exponentiation goes really fast in the square and multiply method (implementation in the source code).
 
