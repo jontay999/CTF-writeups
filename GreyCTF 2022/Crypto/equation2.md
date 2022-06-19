@@ -1,4 +1,4 @@
-# Crypto - Equation 1 (252)
+# Crypto - Equation 2 (456)
 
 ## Challenge
 
