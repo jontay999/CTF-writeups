@@ -151,9 +151,6 @@ Re(
          a_2 + b_2i \\ c_2 + d_2i \\ e_2 + f_2i
      \end{bmatrix}
 )
-$$
-
-$$
 =
      \begin{bmatrix}a_1a_2 + b_1b_2 + c_1c_2 + d_1d_2 +e_1e_2 + f_1f_2\end{bmatrix}
 $$
