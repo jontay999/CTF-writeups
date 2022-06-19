@@ -141,19 +141,7 @@ The `complex.py` file is not too important, it just has the standard implementat
 
 Note: In this case, the multiplication is the dot product, not the cross product
 
-$$
-Re(
-     \begin{bmatrix}
-        a_1 + b_1i \\ c_1 + d_1i \\ e_1 + f_1i
-     \end{bmatrix}
-     .
-     \begin{bmatrix}
-         a_2 + b_2i \\ c_2 + d_2i \\ e_2 + f_2i
-     \end{bmatrix}
-)
-=
-     \begin{bmatrix}a_1a_2 + b_1b_2 + c_1c_2 + d_1d_2 +e_1e_2 + f_1f_2\end{bmatrix}
-$$
+![dot](../images/dot.png)
 
 The solution is very similar to what we had for the [Root](./root.md) challenge. Send big enough numbers so that we can just extract the numbers. We are given a limit this time on the absolute value of coefficients
 
