@@ -36,9 +36,9 @@ Participated in a team of 3 and got top 10, sufficient to qualify for finals. Wa
 
 <em>18th - 19th June</em>
 
-Was held physically, and the challenges were a lot more challenging. Felt they were still quite educational and still learnt a lot with each challenge.
+Was held physically, and the challenges were a lot more difficult. Still quite enjoyed the challenges prepared! Thank you to the organizers :)
 
-Our team managed to get 8th place out of the finalists.
+Our team managed to get 8th place out of the 10 teams.
 
 ![finals](./images/finals.png)
 
