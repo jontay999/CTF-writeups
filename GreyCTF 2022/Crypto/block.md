@@ -149,7 +149,7 @@ def add(block):
             block[i][j] &= 0xFF
 ```
 
-This was slightly tougher to reverse, and also the only part of the `round` encryption that actually changed the original values of the block, each input byte could just be mapped to its new position. This addition uses information from another row `(i*3)%4` and column `(i+j)%4` and adds that value twice to its original value. For the 2nd to 4th row, the operations could be just reversed with subtraction. However, the first row is simply multiplying the original value by 3, because the given the `jth` column of the first operation evaluates to `block[0][j] += 2 * block[0][j]`. This operation could be reversed by calculating `inverse_mod(3,256)`. Note: the mod 256 appears in the last column to make ensure that the remaining values are within byte range. `block[i][j] &= 0xFF`
+This was slightly tougher to reverse, and also the only part of the `round` encryption that actually changed the original values of the block. If this operation didn't exist,  each input byte could just be mapped to its new position without reversing the individual functions. This addition uses information from another row `(i*3)%4` and column `(i+j)%4` and adds that value twice to its original value. For the 2nd to 4th row, the operations could be just reversed with subtraction. However, the first row is simply multiplying the original value by 3, because the given the `jth` column of the first operation evaluates to `block[0][j] += 2 * block[0][j]`. This operation could be reversed by calculating `inverse_mod(3,256)`. Note: the mod 256 appears in the last column to make ensure that the remaining values are within byte range. `block[i][j] &= 0xFF`
 
 ```python
 def add_rev(block):

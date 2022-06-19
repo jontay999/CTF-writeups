@@ -21,7 +21,7 @@ Participated in a team of 3 and got top 10, sufficient to qualify for finals. Wa
 | Misc - Firmware          | No need                               | `binwalk -e`, `7z x` , `grep -rnw . -e grey`               |
 | Misc - Calculator        | [here](./Misc/Calculator.md)          | Algorithms, Prefix Notation                                |
 | Misc - Slow Down         | [here](./Misc/Slow%20Down.md)         | Hash table collisions                                      |
-| Misc - Data Degeneration | [here](./Misc/Data%20Degeneration.md) | Data analysis-ish                                          |
+| Misc - Data Degeneration | [here](./Misc/Data%20Degeneration.ipynb) | Data analysis-ish                                          |
 | Misc - Logical Computers | [here](./Misc/Logical%20Computers)    | Machine Learning                                           |
 | Web - SelNode            | [here](./Web/SelNode.md)              | Selenium Standalone/Grid                                   |
 | Web - Shero              | [here](./Web/Shero.md)                | PHP funkyness and bash magic (Blooded by teammate @Al1enX) |
