@@ -76,7 +76,10 @@ assert coeff[len(coeff) - 1] == 1
 
 We are allowed to give at most 4 inputs of $x$ into the polynomial and get to see the result, and within these 5 tries, we have to give the root of the equation.
 
-My first thought was that this was some weird variant of Shamir's Secret Sharing Scheme, but there is no modulus. In order to find the roots of the equation, we need to know all the coefficients, and plug it into `sage` and pray that `f.roots()` gives you the root. A basic try would just be passing in $f(0)$ so we can know what's the constant of the polynomial, but to be honest, that isn't useful at all. But it does give us an idea of what the coefficients are like, which are approximately 70+ digits, and could be positive or negative.
+My first thought was that this was some weird variant of Shamir's Secret Sharing Scheme, but there is no modulus. In order to find the roots of the equation, we need to know all the coefficients, and plug it into `sage` and pray that `f.roots()` gives you the root.
+
+> Edit: I am wrong please see note at bottom for probably the better way to solve it
+> A basic try would just be passing in $f(0)$ so we can know what's the constant of the polynomial, but to be honest, that isn't useful at all. But it does give us an idea of what the coefficients are like, which are approximately 70+ digits, and could be positive or negative.
 
 Since there is no limit to the $x$ that you pass in, my idea was to pass in a very large number, such as $10^y$, where $y$ is a large number, such that the coefficients will play a very small role in the final output, and largely dominated by the `x`. This would then review the coefficients which either trail behind a string of zeroes or nines. For e.g., if the equation was something like
 
@@ -220,3 +223,10 @@ grey{The_Answer_To_The_Riddle_Is_"Road"!_ZvBtTpyA4GXuuwjB}
 ## Notes:
 
 Honestly, I have no idea how people solved this so fast hahaha, I find its a lot simpler than the next challenge `Dot` and would love to see how other people do it. Tbh, this method is quite potato brain, and I'm sure there's easier ways to do it, and to figure out why I have all these off by 1 errors. Feel free to dm me if you know any of these :)
+
+## Edit:
+
+Thank you @Masrt for pointing this out.
+![intended](../images/root-edit.png)
+
+- So literally send $0$, Alpertron or sage to factorise, send 4 tries ....no wonder the implementation was hidden and we had 4 tries....
