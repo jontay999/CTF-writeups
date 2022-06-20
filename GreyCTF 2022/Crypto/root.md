@@ -177,7 +177,6 @@ for i in split_result:
     if i[0] == '9':
         coeff = (int('1'+'0'*(length)) - int(i)) * -1
         # is negative
-        pass
     else:
         for j in range(len(i)):
             if i[j] != '0':
@@ -229,4 +228,4 @@ Honestly, I have no idea how people solved this so fast hahaha, I find its a lot
 Thank you @Masrt for pointing this out.
 ![intended](../images/root-edit.png)
 
-- So literally send $0$, Alpertron or sage to factorise, send 4 tries ....no wonder the implementation was hidden and we had 4 tries....
+- So literally send $0$, Alpertron or sage to factorise, send 4 factors ....no wonder the implementation was hidden and we had 4 tries....
