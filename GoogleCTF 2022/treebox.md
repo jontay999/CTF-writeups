@@ -263,3 +263,10 @@ if verify_secure(tree):  # Safe to execute!
   exec(compiled)
 
 ```
+
+### Additional Notes
+
+- Found some other cool resources of python sandboxes escape while researching
+
+- [https://gynvael.coldwind.pl/n/python_sandbox_escape](https://gynvael.coldwind.pl/n/python_sandbox_escape)
+- Escaping sandbox by writing to `/proc/self/mem`. [Writeup])(https://blog.mheistermann.de/2014/04/14/plaidctf-2014-nightmares-pwnables-375-writeup/)
