@@ -13,4 +13,4 @@ I played together with Social Engineering Experts and got 7th place.
 | Pwn - We are hiring        | [here](./pwn/we_are_hiring.md)        | C operators, negative indices   |
 | Pwn - n0tes                | [here](./pwn/n0tes/README.md)         | heap, tcache, unsorted bin, uaf |
 | Crypto - High Expectations | [here](./crypto/high_expectations.md) | biased randomization            |
-| Web - Roll the Impossible  | [here](./Web/roll_the_impossible.md)  | idk actually                    |
+| Web - Roll the Impossible  | [here](./web/roll_the_impossible.md)  | idk actually                    |
