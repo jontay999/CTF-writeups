@@ -61,8 +61,8 @@ def getGenerators():
     phi = (p-1) *(q-1)//(e**2)
     g1 = pow(randint(1,n-1),phi,n) #most any number will work
     g2 = pow(randint(1,n-1),phi,n)
-    assert pow(g1,e**2,n) == 1
-    assert pow(g2,e**2,n) == 1
+    assert pow(g1,e,n) == 1 # order of generator is e
+    assert pow(g2,e,n) == 1
     return g1,g2
 
 
