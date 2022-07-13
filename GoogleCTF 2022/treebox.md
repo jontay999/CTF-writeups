@@ -331,3 +331,6 @@ if verify_secure(tree):  # Safe to execute!
 
 - [https://gynvael.coldwind.pl/n/python_sandbox_escape](https://gynvael.coldwind.pl/n/python_sandbox_escape)
 - Escaping sandbox by writing to `/proc/self/mem`. [Writeup])(https://blog.mheistermann.de/2014/04/14/plaidctf-2014-nightmares-pwnables-375-writeup/)
+- Writeup for [this](https://ur4ndom.dev/posts/2022-07-04-gctf-treebox/)
+- DiceCTF TI-1337 pyjail [writeup](https://ur4ndom.dev/posts/2022-02-08-dicectf-ti1337/)
+- 0CTF/TCTF Qualifiers [writeup](https://ur4ndom.dev/posts/2020-06-29-0ctf-quals-pyaucalc/)
