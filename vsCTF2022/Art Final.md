@@ -177,7 +177,7 @@ test(states)
 
 It seems that if it generates 1 byte at a time, it can't predict it well at all.
 
-I managed to find a repo that can recover the state using 1-7 bits of output (albeit with a larger source), but it seems to only work for python2, hopefully will be able to update this soon with an answer
+I managed to find a [repo](https://github.com/fx5/not_random/tree/3287b1f5c965672ef7f1a97ab00b16b5e64a5f0a) that can recover the state using 1-7 bits of output (albeit with a larger source), but it seems to only work for python2, hopefully will be able to update this soon with an answer
 
 #### Relevant Links
 
