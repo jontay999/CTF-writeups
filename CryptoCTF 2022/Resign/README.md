@@ -85,39 +85,133 @@ def main():
 if __name__ == "__main__": main()
 ```
 
-The key of the challenge is that solving for 1 set of constants of `a` and `b` solves for every set of constant, so don't need to sweat the choice of `a` and `b`, just assuming one of them is 1 and do some basic modulo equation stuff to solve the other constant.
+We are given a signature $s = h^d \bmod n$ of a known message hash $h$, and the objective is to come up with new RSA parameters, $p,q,e$ such that the same equation holds.
 
-For solving the $(ax + by) \pmod{q} = 0$ equation, the key is just to assume any value of the constrained value, e.g. if $x$ has to be 12 bit, just set $x$ to be `1<<10 + 1` and then solve the equation for the remaining vairable. Similar to above, solving 1 equation solves every equation so don't sweat the choice of either $x$ or $y$
+The main logic is to come up with smooth primes such that the discrete log problem is easily solvable, however the problem is generating the primes properly. Not all primes will work, but they have a greater chance if $p-1$ and $q-1$ only share a gcd of 2.
 
-Just solve 5 of these and the solution pops out
+The main logic for generating the answer to the discrete_log is through
+
+```py
+sp = GF(p)(s)
+sq = GF(q)(s)
+dp = sp.log(h)
+dq = sq.log(h)
+d = crt([dp, dq], [p-1, q-1])
+```
+
+There are 2 approaches, you can first generate your nice primes $p$ and $q$ that fulfil the above conditions and keep connecting to the server until your prime works, or connect to the server and keep generating primes that eventually work. (The first method is a bit faster in my opinion)
 
 ### Solver
 
 ```python
+from pwn import *
+from hashlib import sha1
+from Crypto.Util.number import *
+from sympy import *
+from math import gcd
 
-q = 325729570283337093050350174899088694381
-r = 312556704284690216591398346568857384535
-s = 56148108437440312246654313011839929156
+# nc 03.cr.yp.toc.tf 11137
+host, port = "03.cr.yp.toc.tf" ,11137
 
-x = 1<<26 +1
-print(x.bit_length())
-# assert y.bit_length() == 12
+MSG = b'::. Can you forge any signature? .::'
+h = bytes_to_long(sha1(MSG).digest())
 
-a = 1
-b = (-r * pow(s,-1,q)) % q
-assert (a*r + b*s) % q == 0
+def gen_primes(nbit, imbalance):
+	p = 2
+	FACTORS = [p]
+	while p.bit_length() < nbit - 2 * imbalance:
+		factor = getPrime(imbalance)
+		FACTORS.append(factor)
+		p *= factor
+	rbit = (nbit - p.bit_length()) // 2
 
-y = ((-a*x) * pow(b,-1,q)) % q
+	while True:
+		r, s = [getPrime(rbit) for _ in '01']
+		_p = p * r * s
+		if _p.bit_length() < nbit: rbit += 1
+		if _p.bit_length() > nbit: rbit -= 1
+		if isPrime(_p + 1):
+			FACTORS.extend((r, s))
+			p = _p + 1
+			break
 
-assert (a*x + b*y) % q == 0
-print(x,y)
+	FACTORS.sort()
+	return p
+
+
+from sympy.ntheory import discrete_log
+from sympy.ntheory.modular import crt
+
+"""
+x^e % n = h
+x^e % p = h1
+x^e % q = h2
+
+
+crt([mods], [residues])
+discrete_log(mod, residue, base b)
+discrete_log(41, 15, 7)
+3 ^ 15 mod 41 = 7
+It's considerably faster when your prime modulus has the property where p - 1 factors into a lot of small primes.
+"""
+p = remote(host, port)
+p.sendlineafter(b'[Q]uit\n', b'P')
+p.recvuntil(b'| SIGN = ')
+sig = eval(p.recvline().strip().decode('utf-8'))
+print("Sig:", sig)
+while True:
+    try:
+        smoothness = 19
+        pp,qq = gen_primes(1024,smoothness), gen_primes(1024,smoothness)
+        phi = (pp-1)*(qq-1)
+        # qq = 165045206650908579037736019275164548249352748140140865322738536587413116145681609233642967749744281008958134740593406604658339451113831975908956806872350428377612084851874310998668516784031659539154269720702521805242048314447883854808775672025712387783452897368206696919953082560862496429977840059305487982379
+        # pp = 127627165276150646228013123897934671386671336958649293289547113375201088762258735903915885724084167289865326800776388793004216358238960385154696784220029644083041122638902654996412115843230720296669976023045277346308988465696604295042658867337303262044646357732975568917957064182242973034717947923729341846679
+        assert gcd(pp-1, qq-1) == 2, "GCD not 2"
+
+        d1 = int(discrete_log(pp, sig % pp, h % pp))
+        d2 = int(discrete_log(qq, sig % qq, h % qq))
+
+        d = crt([pp-1, qq-1], [d1,d2])[0]
+        e = pow(d,-1,phi)
+
+        assert pow(h,d1, pp) == (sig % pp), "First Check"
+        assert pow(h,d2, qq) == (sig % qq), "Second Check"
+        assert pow(h,d, pp*qq) == sig, "Third Check"
+        assert pp != qq and pp.bit_length() == 1024 and qq.bit_length() == 1024
+        break
+    except Exception as e:
+        print("Error:", e)
+        # p.close()
+
+
+print(f"p: {pp}")
+print(f"q: {qq}")
+print(f"e: {e}")
+print(f"d: {d}")
+
+p.sendlineafter(b'[Q]uit\n', b'G')
+p.sendlineafter(b"e, p, q: \n",f"{e}, {pp}, {qq}")
+print('Res:',p.recvline().strip().decode('utf-8'))
+
+MSG2 = MSG[4:-4]
+h2 = bytes_to_long(sha1(MSG2).digest())
+sig2 = pow(h2, d, pp*qq)
+
+p.sendline(b'S')
+p.sendline(str(sig2).encode())
+p.interactive()
 
 ```
 
 ### Flag
 
 ```
-CCTF{f1nDin9_In7Eg3R_50Lut1Ons_iZ_in73rEStIn9!}
+CCTF{Unkn0wN_K3y_5h4rE_4t7aCk_0n_Th3_RSA!}
 ```
 
 ![solve](./solve.png)
+
+### References
+
+- https://zhuanlan.zhihu.com/p/546270351
+  ![other](./other.png)

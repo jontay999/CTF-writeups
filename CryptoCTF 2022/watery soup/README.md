@@ -1,3 +1,109 @@
+## Watery Soup ECC (Medium - Hard) - 15 solves
+
+Note: solved after the CTF with heavy reference from other's solutions
+
+This writeup is my own attempt to synthesize my understanding of this [writeup](https://zhuanlan-zhihu-com.translate.goog/p/546666004?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en)
+
+### Description/Source
+
+```py
+#!/usr/bin/env python3
+
+from Crypto.Util.number import *
+import sys
+from flag import flag
+
+flag = bytes_to_long(flag)
+assert 256 < flag.bit_length() < 512
+
+def die(*args):
+	pr(*args)
+	quit()
+
+def pr(*args):
+	s = " ".join(map(str, args))
+	sys.stdout.write(s + "\n")
+	sys.stdout.flush()
+
+def sc(): return sys.stdin.readline().strip()
+
+def main():
+	border = "|"
+	pr(border*72)
+	pr(border, "Hi crypto-experts, send us your prime and we will mix the flag with ", border)
+	pr(border, "it! Now can you find the flag in the mixed watery soup!? Good luck! ", border)
+	pr(border*72)
+	while True:
+		pr("| Options: \n|\t[S]end the prime! \n|\t[Q]uit")
+		ans = sc().lower()
+		if ans == 's':
+			pr(border, "Send your prime here: ")
+			p = sc()
+			try: p = int(p)
+			except: die(border, "Your input is not valid!!")
+			if not (128 <= p.bit_length() <= 224): die(border, "Your prime is out of bounds :(")
+			if not isPrime(p): die(border, "Your input is NOT prime! Kidding me!?")
+			pr(border, "Send the base here: ")
+			g = sc()
+			try: g = int(g) % p
+			except: die("| Your base is not valid!!")
+			if not (64 < g.bit_length() < 128): die(border, "Your base is too small!!")
+			result = (pow(g ** 3 * flag, flag - g, p) * flag + flag * flag + g) % p
+			pr(border, f"WooW, here is the mixed flag: {result}")
+		elif ans == 'q': die(border, "Quitting ...")
+		else: die(border, "Bye ...")
+
+if __name__ == '__main__': main()
+```
+
+We are allowed to give a base $g$ which is 64 - 128 bits and a prime $p$ which is 128 to 224 bits. Assuming the `flag` is $f$, the server would return
+
+$$
+\begin{aligned}
+    c &= \left((fg^3)^{f-g} f + f^2 + g\right) \bmod p \\
+     &= \left(f^{f-g+1}g^{3f-3g} + f^2 + g \right) \bmod p
+\end{aligned}
+$$
+
+We can use Fermat's little theorem to send a base $g$ and another base $p-g$
+
+$$
+\begin{aligned}
+    a^{p-1} ≡ 1 \bmod p\\
+    a^{p-g} ≡ a^{-g+1} \bmod p \\ \\
+
+    f^{f-(p-g)+1} ≡ f^{f+g} \bmod p\\
+    g^{3f- 3(p-g)} ≡ g^{3f+3g-3} \bmod p
+\end{aligned}
+$$
+
+Note: $(p-g)^{3f+3g-3} ≡ (-g)^{3f+3g-3}$, if we take $g$ to be even, we can predict that $3f+3g-3$ will be even, so we can remove the negative sign
+
+So we can send $g$ to receive $c_1$ and send $p-g$ to receive $c_2$. We can try to match the powers to eliminate the first complicated term
+
+$$
+\begin{gather*}
+    c_1 = f^{f-g+1}g^{3f-3g} + f^2 + g \bmod p\\
+    c_2 = f^{f+g}g^{3f+3g-3} + f^2 -g \bmod p\\
+    f^{2g-1}g^{6g-3}c_1 = f^{f+g}g^{3f+3g-3} + (f^2 + g)f^{2g+1}g^{6g-3} \bmod p \\
+    f^{2g-1}g^{6g-3}c_1 - c_2 = (f^2 + g)f^{2g-1}g^{6g-3}  - f^2 + g\bmod p
+\end{gather*}
+$$
+
+If we set $2g = p-1, f^{2g-1} = f^{p-1-1} = f^{-1}$ by Fermat's little theorem
+
+Because $g,c1,c2,p$ are all known, it turns into a univariate equation with $f$
+
+$$
+f^{-1}g^{6g-3}c_1 - c_2 = (f^2 + g)f^{-1}g^{6g-3}  - f^2 + g\bmod p \\
+g^{6g-3}c_1 - fc_2 = f^2g^{6g-3} + g^{6g-2}  - f^3 + fg\bmod p \\
+$$
+
+So we can send a couple of primes to try to build out CRT because its unlikely that the flag would be 128 bits or less (because the answer we get back would be $f \bmod p$)
+
+### Solver
+
+```python
 from pwn import *
 from libnum import *
 from Crypto.Util.number import *
@@ -75,3 +181,17 @@ for res in product(*residues):
     if b'CCTF' in flag:
         print(flag)
         exit()
+```
+
+### Flag
+
+```
+CCTF{Pl34se_S!r_i_w4N7_5omE_M0R3_5OuP!!}
+```
+
+### References / Other solutions
+
+- https://zhuanlan-zhihu-com.translate.goog/p/546666004?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en
+- https://remyoudompheng-github-io.translate.goog/ctf/cryptoctf2022/watery_soup.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en
+
+![solns](./other.png)

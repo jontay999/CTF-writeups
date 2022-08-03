@@ -54,7 +54,6 @@ def gen_primes(nbit, imbalance):
 		FACTORS.append(factor)
 		p *= factor
 	rbit = (nbit - p.bit_length()) // 2
-	print('rbit:', rbit)
 
 	while True:
 		r, s = [getPrime(rbit) for _ in '01']
@@ -67,15 +66,12 @@ def gen_primes(nbit, imbalance):
 			break
 
 	FACTORS.sort()
-	return (p, FACTORS)
+	return p
 
-p = remote(host, port)
-p.sendlineafter(b'[Q]uit\n', b'P')
-p.recvuntil(b'| SIGN = ')
-sig = eval(p.recvline().strip().decode('utf-8'))
 
 from sympy.ntheory import discrete_log
 from sympy.ntheory.modular import crt
+
 """
 x^e % n = h
 x^e % p = h1 
@@ -88,52 +84,51 @@ discrete_log(41, 15, 7)
 3 ^ 15 mod 41 = 7
 It's considerably faster when your prime modulus has the property where p - 1 factors into a lot of small primes.
 """
-
+p = remote(host, port)
+p.sendlineafter(b'[Q]uit\n', b'P')
+p.recvuntil(b'| SIGN = ')
+sig = eval(p.recvline().strip().decode('utf-8'))
+print("Sig:", sig)
 while True:
     try:
-        smoothness = 10
-        p1,q1 = gen_primes(1024,smoothness), gen_primes(1024,smoothness)
-        prime1, f1 = p1
-        prime2, f2 = q1
+        smoothness = 19
+        pp,qq = gen_primes(1024,smoothness), gen_primes(1024,smoothness)
+        phi = (pp-1)*(qq-1)
+        # qq = 165045206650908579037736019275164548249352748140140865322738536587413116145681609233642967749744281008958134740593406604658339451113831975908956806872350428377612084851874310998668516784031659539154269720702521805242048314447883854808775672025712387783452897368206696919953082560862496429977840059305487982379
+        # pp = 127627165276150646228013123897934671386671336958649293289547113375201088762258735903915885724084167289865326800776388793004216358238960385154696784220029644083041122638902654996412115843230720296669976023045277346308988465696604295042658867337303262044646357732975568917957064182242973034717947923729341846679
+        assert gcd(pp-1, qq-1) == 2, "GCD not 2"
 
-        print("GCD:", gcd(prime1-1,prime2-1))
+        d1 = int(discrete_log(pp, sig % pp, h % pp))
+        d2 = int(discrete_log(qq, sig % qq, h % qq))
 
-
-        d1 = int(discrete_log(prime1, sig % prime1, h % prime1))
-        d2 = int(discrete_log(prime2, sig % prime2, h % prime2))
-
-        magic_exponent = crt([prime1-1, prime2-1], [d1,d2])
-        print()
+        d = crt([pp-1, qq-1], [d1,d2])[0]
+        e = pow(d,-1,phi)
         
-        assert pow(h,d1, prime1) == (sig % prime1), "First Check"
-        assert pow(h,d2, prime2) == (sig % prime2), "Second Check"
-        # breakpoint()
-        assert pow(h,magic_exponent[0], prime1*prime2) == sig, "Third Check"
+        assert pow(h,d1, pp) == (sig % pp), "First Check"
+        assert pow(h,d2, qq) == (sig % qq), "Second Check"
+        assert pow(h,d, pp*qq) == sig, "Third Check"
+        assert pp != qq and pp.bit_length() == 1024 and qq.bit_length() == 1024
         break
     except Exception as e:
         print("Error:", e)
+        # p.close()
 
 
-
-print(f"Prime1: {prime1}, Prime2: {prime2}")
-
-
-
-# exp = 1<<20
-# while True:
-#     try:
-#         exp = nextprime(exp)
-#         print("Trying prime:", exp)
-#         d = pow(exp,-1,(p1[0]-1)*(q1[0]-1))
-#         ct = pow(sig,exp, p1[0]*q1[0])
-#         assert pow(ct,d,p1[0]*q1[0]) == sig
-#         break
-#     except Exception as e:
-#         print(e)
-#         continue
+print(f"p: {pp}")
+print(f"q: {qq}")
+print(f"e: {e}")
+print(f"d: {d}")
 
 p.sendlineafter(b'[Q]uit\n', b'G')
-p.sendline(f"{magic_exponent}, {prime1}, {prime2}")
+p.sendlineafter(b"e, p, q: \n",f"{e}, {pp}, {qq}")
+print('Res:',p.recvline().strip().decode('utf-8'))
+
+MSG2 = MSG[4:-4]
+h2 = bytes_to_long(sha1(MSG2).digest())
+sig2 = pow(h2, d, pp*qq)
+
+p.sendline(b'S')
+p.sendline(str(sig2).encode())
 p.interactive()
 
 
@@ -157,6 +152,6 @@ sp = GF(p)(s)
 sq = GF(q)(s)
 dp = sp.log(h)
 dq = sq.log(h)
-    d = crt([dp, dq], [p-1, q-1])
-    return pow(int(d), -1, lcm(p-1, q-1)).lift()
+d = crt([dp, dq], [p-1, q-1])
+return pow(int(d), -1, lcm(p-1, q-1)).lift()
 """
