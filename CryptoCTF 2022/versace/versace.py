@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# In the name of Allah
 
 from Crypto.Util.number import *
 from flag import flag
