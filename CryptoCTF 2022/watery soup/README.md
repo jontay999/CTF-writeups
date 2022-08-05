@@ -94,8 +94,10 @@ If we set $2g = p-1, f^{2g-1} = f^{p-1-1} = f^{-1}$ by Fermat's little theorem
 Because $g,c1,c2,p$ are all known, it turns into a univariate equation with $f$
 
 $$
-f^{-1}g^{6g-3}c_1 - c_2 = (f^2 + g)f^{-1}g^{6g-3}  - f^2 + g\bmod p \\
-g^{6g-3}c_1 - fc_2 = f^2g^{6g-3} + g^{6g-2}  - f^3 + fg\bmod p \\
+\begin{aligned}
+f^{-1}g^{6g-3}c_1 - c_2 = (f^2 + g)f^{-1}g^{6g-3}  - f^2 + g \bmod p\\
+g^{6g-3}c_1 - fc_2 = f^2g^{6g-3} + g^{6g-2}  - f^3 + fg \bmod p\\
+\end{aligned}
 $$
 
 So we can send a couple of primes to try to build out CRT because its unlikely that the flag would be 128 bits or less (because the answer we get back would be $f \bmod p$)
