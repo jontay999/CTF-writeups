@@ -71,7 +71,6 @@ $$
 \begin{aligned}
     a^{p-1} ≡ 1 \bmod p\\
     a^{p-g} ≡ a^{-g+1} \bmod p \\ \\
-
     f^{f-(p-g)+1} ≡ f^{f+g} \bmod p\\
     g^{3f- 3(p-g)} ≡ g^{3f+3g-3} \bmod p
 \end{aligned}
