@@ -68,8 +68,7 @@ $$
 \begin{gather}
 c_1 = flag ^ s \bmod N \\
 c_2 = flag ^ {-s+1}\bmod N \\
-c_1c_2 = flag \bmod N
-
+c_1c_2 = flag \bmod N \\
 \end{gather}
 $$
 
