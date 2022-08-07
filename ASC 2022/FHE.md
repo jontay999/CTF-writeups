@@ -71,24 +71,12 @@ So $p$ is in the range $[2^{255} + 2^{127} + 2^{24}, 2^{255} + 2^{127} + 2^{25}-
 from libnum import *
 from tqdm import trange
 
-from sympy import sieve
-
 base = 2**255 + 2**127
-# primes = list(sieve.primerange(base+2**23,base+2**24-1))
 
 cts = []
 with open('output.txt', 'r') as f:
     for line in f.readlines():
         cts.append(eval(line))
-
-
-def QuotientNear(a,b):
-#   "Gives the nearest integer to a/b"
-  return (2*a+b)//(2*b)
-
-def modNear(a,b):
-#   "Computes a mod b with a \in ]-b/2,b/2]"
-  return a-b*QuotientNear(a,b)
 
 def decrypt(p,verbose=False):
     b = ''
