@@ -36,9 +36,13 @@ The ECC equation is $y^2 = x^3 + ax + b \ mod\ p$.
 
 We need to find the answer for the equation in modulo prime powers of the 3 different constituents of the modulo and recombine using CRT.
 
-$1.\  y^2 = x^3 + ax + b \ mod \ 2^{63} \\$
-$2.\  y^2 = x^3 + ax + b \ mod \ 651132262883189171676209466993073^{5} \\$
-$3.\  y^2 = x^3 + ax + b \ mod \ 690712633549859897233^{6}$
+$$
+\begin{aligned}
+&1.\  y^2 = x^3 + ax + b \ mod \ 2^{63} \\
+&2.\  y^2 = x^3 + ax + b \ mod \ 651132262883189171676209466993073^{5} \\
+&3.\  y^2 = x^3 + ax + b \ mod \ 690712633549859897233^{6}
+\end{aligned}
+$$
 
 A typical method to do so is Hensel's Lemma. However in this case the `libnum` library has a lovely function called `sqrtmod_prime_power` which can save us all the trouble.
 

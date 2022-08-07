@@ -209,7 +209,6 @@ p.interactive()
 CCTF{Unkn0wN_K3y_5h4rE_4t7aCk_0n_Th3_RSA!}
 ```
 
-![solve](./solve.png)
 
 ### References
 
