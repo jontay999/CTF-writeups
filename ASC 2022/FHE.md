@@ -46,13 +46,13 @@ After googling around the method of encryption, it can be seen that this is DGHV
 Each bit of the flag is encrypted in this fashion, where $m_i$ is the bit of the cipher text and $q_i$ is a random number of 256 bits and $r_i$ is a smaller random number of 128 bits.
 
 $$
-c_i = q_i*p + 2*r_i + m_i
+c_i = q_ip + 2r_i + m_i
 $$
 
 $p$ is the secret key which is a 256 bit prime. If we can recover $p$, we can recover $m_i$ by taking
 
 $$
-m_i = (c_i \% p) \% 2
+m_i = (c_i \bmod p) \bmod 2
 $$
 
 And we can see that the prime $p$ can be brute forced because of this line here
@@ -63,7 +63,7 @@ while not isPrime(_p):
     _p = 2**255 + 2**127 + getRandomNBitInteger(LEN)
 ```
 
-So $p$ is in the range $[2^255 + 2^127 + 2^24, 2^255 + 2^127 + 2^25-1]$, which means just another brute force solution. This would take in worst case ~ 45 mins.
+So $p$ is in the range $[2^{255} + 2^{127} + 2^{24}, 2^{255} + 2^{127} + 2^{25}-1]$, which means just another brute force solution. This would take in worst case ~ 45 mins.
 
 ### Solver
 
