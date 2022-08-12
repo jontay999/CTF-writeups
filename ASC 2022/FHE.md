@@ -94,7 +94,6 @@ def decrypt(p,verbose=False):
 base = 2**255 + 2**127
 for i in trange(2**24, 2**25-1): # 14066502
     if is_prime(base+i):
-        primes.append(base+i)
         decrypt(base+i)
 
 ```
